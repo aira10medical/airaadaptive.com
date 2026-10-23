@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apply · AIRA Adaptive International Clinical Partnership</title>
+<meta name="description" content="Apply for AIRA Adaptive clinical implementation or international multicenter research collaboration. For medical professionals.">
+<link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .lede { font-size:17px; }
+  form { margin-top:8px; }
+  fieldset { border:0; padding:0; margin:28px 0 0; min-width:0; }
+  legend { font-weight:700; font-size:18px; padding:0; margin-bottom:4px; width:100%; border-bottom:1px solid var(--line); padding-bottom:4px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 16px; margin-top:12px; }
+  .grid .full { grid-column:1 / -1; }
+  @media (max-width:560px) { .grid { grid-template-columns:1fr; } }
+  label.f { display:block; font-weight:600; font-size:15px; margin-bottom:4px; }
+  .req { color:var(--accent); }
+  .opt { color:var(--muted); font-weight:400; font-size:13px; }
+  input[type=text], input[type=email], input[type=url], select, textarea {
+    width:100%; font:inherit; font-size:16px; color:var(--fg); background:var(--bg);
+    border:1px solid var(--line); border-radius:8px; padding:10px 12px; min-height:44px; }
+  textarea { min-height:110px; resize:vertical; }
+  input:focus, select:focus, textarea:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent); }
+  [aria-invalid=true] { border-color:#c0392b !important; }
+  .err { color:#c0392b; font-size:14px; margin-top:4px; display:none; }
+  .show { display:block; }
+  .cards { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:12px; }
+  @media (max-width:640px) { .cards { grid-template-columns:1fr; } }
+  .card { display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line); border-radius:10px; padding:12px; cursor:pointer; }
+  .card:has(input:checked) { border-color:var(--accent); background:var(--note); }
+  .card input { margin-top:4px; accent-color:var(--accent); width:18px; height:18px; flex:none; }
+  .card strong { display:block; }
+  .card span { color:var(--muted); font-size:14px; line-height:1.4; display:block; }
+  .inline { display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:4px; }
+  .inline label { display:flex; gap:6px; align-items:center; min-height:32px; cursor:pointer; }
+  .inline input, .consent input { accent-color:var(--accent); width:18px; height:18px; }
+  .consent { display:flex; gap:10px; align-items:flex-start; margin-top:20px; cursor:pointer; }
+  .consent input { margin-top:3px; flex:none; }
+  button { font:inherit; font-weight:700; font-size:17px; color:#fff; background:#1F4E79; border:0; border-radius:10px; padding:14px 28px; min-height:50px; cursor:pointer; width:100%; margin-top:20px; }
+  button:disabled { opacity:.6; cursor:progress; }
+  button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); font-weight:600; }
+  @media (min-width:561px) { button { width:auto; } }
+  .hp { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
+  .status { margin-top:16px; }
+  .status.bad { border-left-color:#c0392b; }
+  #done { display:none; }
+  #done h2 { border:0; margin-top:8px; }
+</style>
+</head>
+<body>
+<header>
+  <img src="../assets/icon.png" alt="">
+  <a class="brand" href="../">AIRA Adaptive</a>
+  <nav><a href="../docs/">Documentation</a><a href="privacy/">Privacy</a><a href="https://xdofwnncvhgdcsxlslci.supabase.co/functions/v1/aira-terms">Terms</a></nav>
+</header>
+<main>
+<h1>AIRA Adaptive — International Clinical Partnership</h1>
+<p class="lede"><strong>Apply for Clinical Implementation or Multicenter Research Collaboration</strong></p>
+<p>AIRA Adaptive is a physician-directed clinical decision-support system integrating preoperative risk stratification, BDD screening, and structured clinical assessment.</p>
+<p>We are inviting qualified medical professionals to express their interest in clinical implementation and international multicenter research collaboration.</p>
+<p class="note">Submitting this form expresses interest only. It does not grant access to the software, establish a research agreement, or guarantee acceptance.</p>
+
+<section id="done" class="note" role="status" tabindex="-1">
+  <h2>Application received</h2>
+  <p>Thank you, <strong id="done-name"></strong>. Your application has been received and will be reviewed personally by Dr. Bukret. We will contact you at <strong id="done-email"></strong>.</p>
+  <button type="button" class="secondary" id="again">Submit another application</button>
+</section>
+
+<form id="apply" novalidate>
+  <p class="muted">Fields marked <span class="req">*</span> are required. Please do not include any patient data.</p>
+
+  <fieldset>
+    <legend>Primary interest <span class="req">*</span></legend>
+    <div class="cards" role="radiogroup" aria-describedby="err-interest">
+      <label class="card"><input type="radio" name="interest" value="Clinical Implementation" required><div><strong>Clinical Implementation / Licensing</strong><span>Incorporate AIRA Adaptive into my clinical practice.</span></div></label>
+      <label class="card"><input type="radio" name="interest" value="Multicenter Research"><div><strong>Multicenter Prospective Research</strong><span>Participate as investigator or collaborating center.</span></div></label>
+      <label class="card"><input type="radio" name="interest" value="Both"><div><strong>Both</strong><span>Clinical implementation and research collaboration.</span></div></label>
+    </div>
+    <div class="err" id="err-interest">Please select your primary interest.</div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Professional details</legend>
+    <div class="grid">
+      <div class="full"><label class="f" for="full_name">Full name <span class="req">*</span></label>
+        <input type="text" id="full_name" name="full_name" autocomplete="name" maxlength="120" required>
+        <div class="err" id="err-full_name">Please enter your full name.</div></div>
+      <div class="full"><label class="f" for="email">Professional email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="200" required>
+        <div class="err" id="err-email">Please enter a valid email address.</div></div>
+      <div><label class="f" for="country">Country <span class="req">*</span></label>
+        <input type="text" id="country" name="country" autocomplete="country-name" list="countries" maxlength="80" required>
+        <div class="err" id="err-country">Please enter your country.</div></div>
+      <div><label class="f" for="city">City <span class="opt">optional</span></label>
+        <input type="text" id="city" name="city" autocomplete="address-level2" maxlength="120"></div>
+      <div><label class="f" for="specialty">Specialty <span class="req">*</span></label>
+        <input type="text" id="specialty" name="specialty" list="specialties" maxlength="120" required>
+        <div class="err" id="err-specialty">Please enter your specialty.</div></div>
+      <div><label class="f" for="institution">Institution / Practice <span class="opt">optional</span></label>
+        <input type="text" id="institution" name="institution" autocomplete="organization" maxlength="200"></div>
+      <div class="full"><label class="f" for="website">Professional website <span class="opt">optional</span></label>
+        <input type="url" id="website" name="website" inputmode="url" placeholder="https://" maxlength="300">
+        <div class="err" id="err-website">Please enter a valid website address, or leave it blank.</div></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Practice profile <span class="opt">optional</span></legend>
+    <div class="grid">
+      <div class="full"><label class="f" for="surgical_volume">Approximate annual surgical volume</label>
+        <select id="surgical_volume" name="surgical_volume">
+          <option value="">Select…</option><option>Under 50</option><option>50–150</option><option>151–300</option><option>Over 300</option>
+        </select></div>
+      <div class="full"><span class="f" style="display:block;font-weight:600;font-size:15px">Do you currently use a structured preoperative risk assessment?</span>
+        <div class="inline"><label><input type="radio" name="structured_risk_assessment" value="Yes"> Yes</label><label><input type="radio" name="structured_risk_assessment" value="No"> No</label></div></div>
+      <div class="full"><span class="f" style="display:block;font-weight:600;font-size:15px">Interested in a personalized demonstration?</span>
+        <div class="inline"><label><input type="radio" name="wants_demo" value="Yes"> Yes</label><label><input type="radio" name="wants_demo" value="No"> No</label></div></div>
+      <div class="full"><label class="f" for="comments">Comments / Specific needs</label>
+        <textarea id="comments" name="comments" maxlength="3000" placeholder="No patient information, please."></textarea></div>
+    </div>
+  </fieldset>
+
+  <div class="hp" aria-hidden="true"><label for="fax">Fax</label><input type="text" id="fax" name="fax" tabindex="-1" autocomplete="off"></div>
+
+  <label class="consent"><input type="checkbox" id="consent_contact" name="consent_contact" required>
+    <span>I consent to be contacted by AIRA Adaptive regarding this application. My details will be used only to review and respond to it, as described in the <a href="privacy/">applicant privacy notice</a>. <span class="req">*</span></span></label>
+  <div class="err" id="err-consent_contact">Consent is required to process your application.</div>
+
+  <button type="submit" id="submit">Submit application</button>
+  <p class="note status bad" id="status" role="alert" hidden></p>
+</form>
+
+<datalist id="specialties">
+  <option>Plastic Surgery</option><option>Aesthetic / Cosmetic Surgery</option><option>Reconstructive Surgery</option>
+  <option>Anesthesiology</option><option>Dermatologic Surgery</option><option>Facial Plastic Surgery</option>
+  <option>Oculoplastic Surgery</option><option>General Surgery</option><option>Psychiatry / Psychology</option>
+</datalist>
+<datalist id="countries"></datalist>
+</main>
+<footer>
+  AIRA Adaptive is provided by Dr. Williams Erik Bukret, Buenos Aires, Argentina · <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">Contact</a><br>
+  Clinical decision support for licensed professionals. Not a diagnosis. Not for emergencies. No regulatory clearance or certification is claimed.
+</footer>
+<script>
+(function () {
+  var ENDPOINT = "https://ituydcvoyftohheptync.supabase.co/functions/v1/aira-apply";
+  var form = document.getElementById("apply"), btn = document.getElementById("submit"),
+      statusEl = document.getElementById("status"), done = document.getElementById("done");
+  var EMAIL_RE = /^[^\s@<>()",;:]+@[^\s@<>()",;:]+\.[A-Za-z]{2,}$/;
+  var sid, started, sending = false;
+
+  function uuid() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    var b = new Uint8Array(16); crypto.getRandomValues(b); b[6] = b[6] & 15 | 64; b[8] = b[8] & 63 | 128;
+    var h = Array.prototype.map.call(b, function (x) { return (x + 256).toString(16).slice(1); }).join("");
+    return h.slice(0, 8) + "-" + h.slice(8, 12) + "-" + h.slice(12, 16) + "-" + h.slice(16, 20) + "-" + h.slice(20);
+  }
+  function fresh() { sid = uuid(); started = Date.now(); }
+  fresh();
+
+  // Country suggestions from the browser's own locale data (no external request).
+  try {
+    var dn = new Intl.DisplayNames(["en"], { type: "region" }), names = [], A = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (var i = 0; i < 26; i++) for (var j = 0; j < 26; j++) {
+      var c = A[i] + A[j], n = dn.of(c);
+      if (n && n !== c && !/Unknown|Outlying|Pseudo|European Union|Eurozone|United Nations|world/i.test(n)) names.push(n);
+    }
+    names.sort().filter(function (n, k, a) { return a.indexOf(n) === k; }).forEach(function (n) {
+      var o = document.createElement("option"); o.value = n; document.getElementById("countries").appendChild(o);
+    });
+  } catch (e) {}
+
+  function val(name) {
+    var el = form.elements[name];
+    if (!el) return "";
+    if (el.type === "checkbox") return el.checked;
+    return (el.value || "").trim();
+  }
+  function setErr(name, bad) {
+    var e = document.getElementById("err-" + name), el = document.getElementById(name);
+    if (e) e.classList.toggle("show", bad);
+    if (el) el.setAttribute("aria-invalid", bad ? "true" : "false");
+    return bad;
+  }
+  function validate() {
+    var first = null, checks = [
+      ["interest", !val("interest")],
+      ["full_name", val("full_name").length < 2],
+      ["email", !EMAIL_RE.test(val("email"))],
+      ["country", !val("country")],
+      ["specialty", !val("specialty")],
+      ["website", !!val("website") && !/^(https?:\/\/)?[^\s<>"]+\.[^\s<>"]+$/i.test(val("website"))],
+      ["consent_contact", !val("consent_contact")]
+    ];
+    checks.forEach(function (c) { if (setErr(c[0], c[1]) && !first) first = c[0]; });
+    if (first) {
+      var el = first === "interest" ? form.querySelector("input[name=interest]") : document.getElementById(first);
+      el.focus(); el.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+    return !first;
+  }
+  function showStatus(msg) { statusEl.textContent = msg; statusEl.hidden = !msg; }
+
+  form.addEventListener("input", function (e) {
+    var n = e.target.name; if (n && document.getElementById("err-" + n) && document.getElementById("err-" + n).classList.contains("show")) validate();
+  });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (sending) return;
+    showStatus("");
+    if (!validate()) return;
+    sending = true; btn.disabled = true; btn.textContent = "Submitting…";
+    var body = {
+      submission_id: sid, elapsed_ms: Date.now() - started, fax: val("fax"),
+      full_name: val("full_name"), email: val("email"), country: val("country"), specialty: val("specialty"),
+      interest: val("interest"), institution: val("institution"), city: val("city"), website: val("website"),
+      surgical_volume: val("surgical_volume"), structured_risk_assessment: val("structured_risk_assessment"),
+      wants_demo: val("wants_demo"), comments: val("comments"), consent_contact: val("consent_contact") === true
+    };
+    var ctrl = window.AbortController ? new AbortController() : null, timer = ctrl && setTimeout(function () { ctrl.abort(); }, 25000);
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal: ctrl && ctrl.signal })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); })
+      .then(function (res) {
+        if (res.status === 200 && res.j.ok === true) {
+          document.getElementById("done-name").textContent = body.full_name;
+          document.getElementById("done-email").textContent = body.email;
+          form.style.display = "none"; done.style.display = "block"; done.focus(); done.scrollIntoView({ block: "start" });
+          return;
+        }
+        var m = {
+          429: "Too many applications were sent from this network in the last hour. Please try again later or write to drbukret@drbukret.com.",
+          422: "Some fields are not valid. Please review the form and try again.",
+          502: "Your application could not be delivered right now. Please try again in a few minutes. Your data has not been lost."
+        };
+        showStatus(m[res.status] || "Your application could not be sent. Please try again. If the problem persists, write to drbukret@drbukret.com.");
+      })
+      .catch(function () { showStatus("Network error: your application was not sent. Please check your connection and press Submit again."); })
+      .then(function () { if (timer) clearTimeout(timer); sending = false; btn.disabled = false; btn.textContent = "Submit application"; });
+  });
+
+  document.getElementById("again").addEventListener("click", function () {
+    form.reset(); fresh(); showStatus("");
+    done.style.display = "none"; form.style.display = "block"; window.scrollTo(0, 0);
+    document.getElementById("full_name").focus();
+  });
+})();
+</script>
+</body>
+</html>
