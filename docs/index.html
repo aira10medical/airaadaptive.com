@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIRA Adaptive Documentation</title>
+<meta name="description" content="How to connect and use the AIRA Adaptive connector, its tools, data handling and troubleshooting.">
+<link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header>
+  <img src="../assets/icon.png" alt="">
+  <a class="brand" href="../">AIRA Adaptive</a>
+  <nav><a href="../docs/">Documentation</a><a href="https://xdofwnncvhgdcsxlslci.supabase.co/functions/v1/aira-privacy">Privacy</a><a href="https://xdofwnncvhgdcsxlslci.supabase.co/functions/v1/aira-terms">Terms</a></nav>
+</header>
+<main>
+<h1>AIRA Adaptive connector</h1>
+<p class="muted">Structured preoperative risk screening for plastic and aesthetic surgery, for licensed medical professionals. Works with AI assistants that support remote MCP connectors, including Claude.</p>
+
+<p class="note"><strong>Pilot:</strong> the current environment accepts <strong>fictitious cases only</strong>. Do not enter real patient data. Results are decision support for the treating professional; they are not a diagnosis and do not replace clinical judgment. Not for patients or emergencies.</p>
+
+<h2>Requirements</h2>
+<ul>
+  <li>An AIRA Adaptive professional account, verified by AIRA Adaptive outside the AI assistant, with assessments available.</li>
+  <li>An AI assistant plan that allows connectors.</li>
+</ul>
+
+<h2>Connect</h2>
+<ol>
+  <li>In Claude, open <em>Customize → Connectors</em> and add <strong>AIRA Adaptive</strong> from the directory, or select <em>Add custom connector</em> and enter the URL <code>https://mcp.drbukret.com/functions/v1/aira-adaptive</code>.</li>
+  <li>Click <em>Connect</em>. You are sent to the AIRA Adaptive sign-in page.</li>
+  <li>Sign in with your professional account, check the app name and the return address on the consent screen, and click <em>Allow</em>.</li>
+</ol>
+<p>Claude asks for your approval before each tool call by default. You can change this per tool in the connector settings.</p>
+<p>To disconnect, remove the connector in your assistant's settings. Access tokens expire automatically.</p>
+
+<h2>Tools</h2>
+<div class="table"><table>
+  <tr><th>Tool</th><th>Type</th><th>What it does</th></tr>
+  <tr><td><code>start_assessment</code></td><td>Read</td><td>Checks that the account is verified and has an assessment available, and lists the data required. Uses no assessment.</td></tr>
+  <tr><td><code>get_available_assessments</code></td><td>Read</td><td>Returns the account status and the number of assessments available.</td></tr>
+  <tr><td><code>run_assessment</code></td><td>Write</td><td>Runs the official AIRA Adaptive engine after you confirm the data and returns the report: Bukret Score, risk level, contributing factors, recommendations and a surgical eligibility suggestion. Uses one assessment only if a report is returned.</td></tr>
+  <tr><td><code>list_assessments</code></td><td>Read</td><td>Lists recent assessments of your organization.</td></tr>
+  <tr><td><code>get_assessment</code></td><td>Read</td><td>Returns one full report from your organization's history.</td></tr>
+</table></div>
+
+<h2>Example prompts</h2>
+<ul>
+  <li>"How many AIRA Adaptive assessments do I have available?"</li>
+  <li>"Fictitious test case TEST-01: run an AIRA Adaptive pre-op screening. 45 y, 70 kg, 168 cm, never smoked, Caprini 2, liposuction, all 3 consents given."</li>
+  <li>"Show my last 5 AIRA Adaptive assessments."</li>
+  <li>"Open the full report of my most recent AIRA Adaptive assessment."</li>
+</ul>
+
+<h2>Data</h2>
+<p>The connector receives only the structured fields of a confirmed assessment: age, weight, height, smoking status, Caprini total score, optional hypertension, procedure and short case alias, plus the three consents as stated by the professional. It never asks for names, emails, phone numbers or ID numbers, and it does not read your assistant's memory or chat history. See the <a href="https://xdofwnncvhgdcsxlslci.supabase.co/functions/v1/aira-privacy">Privacy Policy</a> and <a href="https://xdofwnncvhgdcsxlslci.supabase.co/functions/v1/aira-terms">Terms</a>.</p>
+
+<h2>Troubleshooting</h2>
+<div class="table"><table>
+  <tr><th>Message</th><th>What to do</th></tr>
+  <tr><td>Account pending verification</td><td>Your professional account has not been activated yet. Contact AIRA Adaptive support.</td></tr>
+  <tr><td>No assessments available</td><td>Your organization has no assessments left. Access is managed outside the assistant.</td></tr>
+  <tr><td>"This connection request is no longer valid"</td><td>The sign-in link expired. Start the connection again from your assistant.</td></tr>
+  <tr><td>Pilot: fictitious patients only</td><td>Confirm that the case is fictitious. Real patient data is not accepted in the pilot.</td></tr>
+  <tr><td>Authorization failed or connector disconnected</td><td>Remove and add the connector again, then sign in.</td></tr>
+</table></div>
+
+<h2>Support</h2>
+<p><a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">drbukret.com/contact</a></p>
+<p class="muted">Last updated: October 23, 2026</p>
+</main>
+<footer>
+  AIRA Adaptive is provided by Dr. Williams Erik Bukret, Buenos Aires, Argentina · <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">Contact</a><br>
+  Clinical decision support for licensed professionals. Not a diagnosis. Not for emergencies. No regulatory clearance or certification is claimed.
+</footer>
+</body>
+</html>
