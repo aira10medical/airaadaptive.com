@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIRA Adaptive Privacy</title>
+<meta name="description" content="AIRA Adaptive Privacy.">
+<link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header>
+  <img src="../assets/icon.png" alt="">
+  <a class="brand" href="../">AIRA Adaptive</a>
+  <nav><a href="../docs/">Documentation</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a></nav>
+</header>
+<main>
+<h1>AIRA Adaptive — Privacy Policy</h1>
+<div class="legal">Effective date: October 23, 2026
+
+1. WHO WE ARE
+AIRA Adaptive is operated by Dr. Williams Erik Bukret, Buenos Aires, Argentina.
+Contact: drbukret@drbukret.com - https://drbukret.com/contact/
+
+2. WHO THE SERVICE IS FOR
+AIRA Adaptive is a preoperative risk screening and clinical decision-support tool for licensed medical professionals. It is not intended for patients, minors or emergencies, and it does not diagnose.
+During the current pilot, the service accepts only fictitious cases. Do not enter data about real patients.
+
+3. DATA WE PROCESS
+3.1 Professional account: email address, password, and the name, country, specialty and account status you provide or that we assign after verification, plus your organization membership. Passwords are handled by our authentication provider and are never visible to us in plain text.
+3.2 Assessment data you enter: age, weight, height, smoking status, Caprini total score, and optionally hypertension, planned procedure and a short case alias, together with your confirmation of the patient&#x27;s privacy, medical and contact consents. We do not request patient names, email addresses, phone numbers or identification numbers. The case alias field rejects email addresses, spaces and long digit sequences.
+3.3 Results produced by the AIRA Adaptive engine for each assessment: score, risk level, contributing factors, recommendations and surgical eligibility suggestion.
+3.4 Access requests sent from the AIRA Adaptive website: name, email address, country, specialty, organization, message, marketing preference, and a hashed form of the IP address used to limit repeated requests.
+3.5 Security and technical data:
+- OAuth access and refresh tokens are stored only as cryptographic hashes.
+- IP addresses are used to limit request rates on sign-in and authorization endpoints. They are kept in rate-limit records that become eligible for deletion one day after their time window.
+- An audit log records account events (sign-up, account activation, AI assistant connection (ChatGPT or Claude), completed or failed assessments) without clinical inputs.
+- Application logs record technical codes only, not clinical data or tokens. Our hosting provider also keeps standard request logs, such as IP address and requested URL.
+
+4. HOW WE USE DATA
+To create and verify professional accounts, run the assessments you request, show your assessment history and available assessments, and protect the service against abuse.
+
+5. USE THROUGH CHATGPT
+When you use AIRA Adaptive inside ChatGPT, OpenAI processes your conversation under its own terms and privacy policy. AIRA Adaptive receives the fields listed in section 3.2 only when you confirm an assessment, plus the account link you authorize through OAuth.
+
+5A. USE THROUGH CLAUDE
+When you use AIRA Adaptive inside Claude (claude.ai, Claude Desktop or Claude mobile), Anthropic processes your conversation under its own terms and privacy policy. AIRA Adaptive receives the fields listed in section 3.2 only when you confirm an assessment, plus the account link you authorize through OAuth. AIRA Adaptive does not access Claude&#x27;s memory, chat history, conversation summaries or files.
+
+6. SERVICE PROVIDERS AND LOCATION
+- Supabase (database, authentication and server functions), hosted in the United States (AWS us-east-1).
+- GitHub Pages (hosting of the AIRA Adaptive sign-in page and of this website).
+- OpenAI (ChatGPT), when you use the integration.
+- Anthropic (Claude), when you use the integration.
+
+7. ACCESS CONTROL
+Each professional organization can access only its own assessments. Server credentials are never sent to browsers or to AI assistants (ChatGPT or Claude).
+
+8. RETENTION AND DELETION
+- There is no automatic retention period. Accounts, profiles, organizations, assessments, results, credit records, access requests and the audit log are kept until they are deleted at your request.
+- You can ask us to delete a single assessment, all assessments of your organization, or your entire account by writing to drbukret@drbukret.com from the email address of your account. We delete the data manually after verifying the request and confirm by email when it is done. Deleting an assessment removes its results; credit records are kept without any link to the deleted assessment. Deleting your account also removes your profile, organization, credit records, access requests and connection tokens, and the audit log keeps no link to you.
+- Automatic clean-up of technical records: request-rate records, which include IP addresses, become eligible for deletion one day after they are created; pending sign-in authorizations once they expire; sign-in codes one day after they expire; and connection tokens seven days after they expire. This clean-up runs periodically, so records may remain somewhat longer.
+- Our hosting provider (Supabase) keeps daily backups of the database and request logs, which include IP addresses, for a limited period under its own policies. Deleted data may remain in those backups until they expire.
+
+9. YOUR RIGHTS
+You can request access, correction or deletion of your personal data by writing to drbukret@drbukret.com. In Argentina, the supervisory authority is the Agencia de Acceso a la Información Pública (AAIP).
+
+10. CHANGES
+We will publish any change on this page with a new effective date.</div>
+</main>
+<footer>
+  AIRA Adaptive is provided by Dr. Williams Erik Bukret, Buenos Aires, Argentina · <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">Contact</a><br>
+  Clinical decision support for licensed professionals. Not a diagnosis. Not for emergencies. No regulatory clearance or certification is claimed.
+</footer>
+</body>
+</html>
