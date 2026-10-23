@@ -18,7 +18,7 @@
 <h1>AIRA Adaptive Professional connector</h1>
 <p class="muted">Clinical decision support for plastic surgeons: preoperative risk stratification with the Bukret Score and optimization recommendations, for qualified medical professionals. Works with AI assistants that support remote MCP connectors, including Claude.</p>
 
-<p class="note"><strong>Pilot:</strong> the current environment accepts <strong>fictitious cases only</strong>. Do not enter real patient data. Results are decision support for the treating professional; they are not a diagnosis and do not replace clinical judgment. Not for patients or emergencies.</p>
+<p class="note"><strong>Current release:</strong> AIRA Adaptive is designed for the assessment of real patients by verified professionals. In this release, real-patient processing is <strong>not yet enabled</strong>: the server accepts only cases the professional confirms as fictitious. Do not enter real patient data until this notice is removed. Results are decision support for the treating professional; they are not a diagnosis and do not replace clinical judgment. Not for patients or emergencies.</p>
 
 <h2>Professional review and use of AI</h2>
 <ul>
@@ -38,7 +38,7 @@
 <ol>
   <li>In Claude, open <em>Customize → Connectors</em> and add <strong>AIRA Adaptive</strong> from the directory, or select <em>Add custom connector</em> and enter the URL <code>https://mcp.drbukret.com/functions/v1/aira-adaptive</code>.</li>
   <li>Click <em>Connect</em>. You are sent to the AIRA Adaptive sign-in page.</li>
-  <li>Sign in with your professional account, check the app name and the return address on the consent screen, and click <em>Allow</em>.</li>
+  <li>Sign in with your professional account, check the app name on the consent screen, and click <em>Allow</em>.</li>
 </ol>
 <p>Claude asks for your approval before each tool call by default. You can change this per tool in the connector settings.</p>
 <p>To disconnect, remove the connector in your assistant's settings. Access tokens expire automatically.</p>
@@ -48,21 +48,33 @@
   <tr><th>Tool</th><th>Type</th><th>What it does</th></tr>
   <tr><td><code>start_assessment</code></td><td>Read</td><td>Checks that the account is verified and has an assessment available, and lists the data required. Uses no assessment.</td></tr>
   <tr><td><code>get_available_assessments</code></td><td>Read</td><td>Returns the account status and the number of assessments available.</td></tr>
-  <tr><td><code>run_assessment</code></td><td>Write</td><td>Runs the official AIRA Adaptive engine after you confirm the data and returns the report: Bukret Score, risk level, contributing factors, recommendations and a surgical eligibility suggestion. Uses one assessment only if a report is returned.</td></tr>
-  <tr><td><code>list_assessments</code></td><td>Read</td><td>Lists recent assessments of your organization.</td></tr>
+  <tr><td><code>run_assessment</code></td><td>Write</td><td>Runs the official AIRA Adaptive engine after you confirm the data and the four consents, and returns the report: Bukret Score, risk level, contributing factors, recommendations and a surgical eligibility suggestion. Uses one assessment only if a report is returned.</td></tr>
+  <tr><td><code>list_assessments</code></td><td>Read</td><td>Lists recent assessments of your organization (procedure, year and risk level).</td></tr>
   <tr><td><code>get_assessment</code></td><td>Read</td><td>Returns one full report from your organization's history.</td></tr>
 </table></div>
 
 <h2>Example prompts</h2>
 <ul>
   <li>"How many AIRA Adaptive assessments do I have available?"</li>
-  <li>"Fictitious test case TEST-01: run an AIRA Adaptive pre-op screening. 45 y, 70 kg, 168 cm, never smoked, Caprini 2, liposuction, all 3 consents given."</li>
+  <li>"Fictitious test case TEST-01: run an AIRA Adaptive pre-op screening. 45 y, 70 kg, 168 cm, never smoked, Caprini 2, liposuction, all 4 consents given (privacy, medical, contact and AI use). The case is fictitious."</li>
   <li>"Show my last 5 AIRA Adaptive assessments."</li>
   <li>"Open the full report of my most recent AIRA Adaptive assessment."</li>
 </ul>
 
-<h2>Data</h2>
-<p>The connector receives only the structured fields of a confirmed assessment: age, weight, height, smoking status, Caprini total score, optional hypertension, procedure and short case alias, plus the three consents as stated by the professional. It never asks for names, emails, phone numbers or ID numbers, and it does not read your assistant's memory or chat history. See the <a href="../privacy/">Privacy Policy</a> and <a href="../terms/">Terms</a>.</p>
+<h2>Consents</h2>
+<p>Before running, the professional confirms four consents given by the patient. Without all four, no assessment is run.</p>
+<ul>
+  <li><strong>Privacy:</strong> the patient accepted the AIRA Adaptive privacy policy, including processing in the United States.</li>
+  <li><strong>Medical:</strong> the patient gave medical consent.</li>
+  <li><strong>Contact:</strong> the patient agreed to be contacted.</li>
+  <li><strong>AI use:</strong> the patient was informed and agreed that an AI-assisted decision-support tool is used in their evaluation.</li>
+</ul>
+<p>Each completed or failed assessment records, in the organization's audit log, the consents confirmed, the professional who confirmed them, the time and the version of the privacy notice.</p>
+
+<h2>Data and validation</h2>
+<p>The connector receives only the structured fields of a confirmed assessment: age, weight, height, smoking status, Caprini total score, optional hypertension and a procedure from a fixed list (liposuction, abdominoplasty, full facelift, rhinoplasty, breast augmentation or other), plus the four consents. It does not request or accept names, emails, phone numbers, ID numbers, dates or case aliases. History is shown to the assistant with the year only. It does not read your assistant's memory or chat history.</p>
+<p>The server rejects: ages outside 16 to 89 or with decimals, a Caprini total with decimals or outside 0 to 60, a weight and height that give a body mass index outside 12 to 80 (usually swapped values), and any procedure outside the list.</p>
+<p> See the <a href="../privacy/">Privacy Policy</a> and <a href="../terms/">Terms</a>.</p>
 
 <h2>Troubleshooting</h2>
 <div class="table"><table>
@@ -70,7 +82,9 @@
   <tr><td>Account pending verification</td><td>Your professional account has not been activated yet. Contact AIRA Adaptive support.</td></tr>
   <tr><td>No assessments available</td><td>Your organization has no assessments left. Access is managed outside the assistant.</td></tr>
   <tr><td>"This connection request is no longer valid"</td><td>The sign-in link expired. Start the connection again from your assistant.</td></tr>
-  <tr><td>Pilot: fictitious patients only</td><td>Confirm that the case is fictitious. Real patient data is not accepted in the pilot.</td></tr>
+  <tr><td>Pilot: fictitious patients only</td><td>Confirm that the case is fictitious. Real-patient processing is not yet enabled in this release.</td></tr>
+  <tr><td>Missing consents or missing AI consent</td><td>Confirm all four consents. Without them no assessment is run and no assessment is used.</td></tr>
+  <tr><td>Implausible BMI, whole numbers, invalid procedure</td><td>Check weight and height, enter age and Caprini as whole numbers, and choose a procedure from the list (or "other").</td></tr>
   <tr><td>Authorization failed or connector disconnected</td><td>Remove and add the connector again, then sign in.</td></tr>
 </table></div>
 
