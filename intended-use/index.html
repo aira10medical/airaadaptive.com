@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIRA Adaptive Intended Use</title>
+<meta name="description" content="Intended use, intended users, inputs, outputs, contraindications and limitations of AIRA Adaptive.">
+<link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header>
+  <img src="../assets/icon.png" alt="">
+  <a class="brand" href="../">AIRA Adaptive</a>
+  <nav><a href="../docs/">Documentation</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a></nav>
+</header>
+<main>
+<h1>Intended use</h1>
+<p class="muted">Version 2026-10-24</p>
+<p class="note"><strong>Current release:</strong> AIRA Adaptive is designed for physicians to assess their real patients. In this release, real-patient processing is <strong>not yet enabled</strong>: the server accepts only cases the professional confirms as fictitious, used for testing, demonstration and review. Do not enter real patient data until this notice is removed.</p>
+
+<h2>Intended purpose</h2>
+<p>AIRA Adaptive is clinical decision-support software that provides a structured preoperative risk stratification for elective plastic and aesthetic surgery. It returns a risk score (Bukret Score), a risk level, contributing factors, preoperative optimization recommendations and a preliminary surgical eligibility category, to support, not replace, the treating physician's assessment.</p>
+
+<h2>Intended users</h2>
+<ul>
+  <li>Physicians and qualified healthcare professionals with a professional account verified by AIRA Adaptive.</li>
+  <li>Patients are not users: they never use the connector or run their own assessment.</li>
+</ul>
+
+<h2>Intended patient population</h2>
+<p>Adults aged 16 to 89 being considered for elective plastic or aesthetic surgery: liposuction, abdominoplasty, full facelift, rhinoplasty, breast augmentation or another procedure.</p>
+
+<h2>Use environment</h2>
+<p>A remote connector used inside an AI assistant (Claude or ChatGPT) by the professional, during preoperative planning. Not for emergencies or intraoperative use.</p>
+
+<h2>Inputs</h2>
+<p>Age, weight, height, smoking status, Caprini total score, optional hypertension and a procedure from a fixed list, entered by the professional, plus the professional's confirmation of four patient consents (privacy, medical, contact and AI use). No names, contact details, ID numbers or dates.</p>
+
+<h2>Outputs</h2>
+<ul>
+  <li>Bukret Score and risk level, with contributing factors.</li>
+  <li>Preoperative optimization recommendations for the professional.</li>
+  <li>A preliminary surgical eligibility category for medical review. It is never an authorization to operate.</li>
+  <li>Model and rules versions, and a disclaimer.</li>
+</ul>
+
+<h2>Who decides</h2>
+<p>The physician obtains and documents the consents, enters and validates the data, runs the assessment, interprets the score and factors, reviews the recommendations and makes the final decision on surgical eligibility and preoperative optimization.</p>
+
+<h2>Not intended for</h2>
+<ul>
+  <li>Diagnosis, emergencies or urgent care.</li>
+  <li>Patients under 16 or over 89, or non-elective surgery.</li>
+  <li>Any decision made without review by a qualified professional.</li>
+  <li>Use by patients or the public.</li>
+</ul>
+
+<h2>Limitations</h2>
+<ul>
+  <li>The assessment uses only the inputs above. It does not consider the full medical history, physical examination, laboratory results, medication, other comorbidities or anesthetic risk.</li>
+  <li>Results depend on the accuracy of the data entered. Out-of-range values are rejected, but not every error can be detected.</li>
+  <li>The AI assistant presents the report produced by the official engine; if a summary differs, the report retrieved with <code>get_assessment</code> prevails.</li>
+  <li>No regulatory clearance, registration or certification is claimed. No clinical performance claims are made.</li>
+</ul>
+
+</main>
+<footer>
+  AIRA Adaptive is provided by Dr. Williams Erik Bukret, Buenos Aires, Argentina · <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">Contact</a><br>
+  Clinical decision support for licensed professionals. Not a diagnosis. Not for emergencies. No regulatory clearance or certification is claimed.
+</footer>
+</body>
+</html>

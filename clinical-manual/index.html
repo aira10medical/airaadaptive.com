@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIRA Adaptive Clinical User Guide</title>
+<meta name="description" content="Step-by-step clinical guide for professionals using the AIRA Adaptive connector in Claude or ChatGPT.">
+<link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header>
+  <img src="../assets/icon.png" alt="">
+  <a class="brand" href="../">AIRA Adaptive</a>
+  <nav><a href="../docs/">Documentation</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a></nav>
+</header>
+<main>
+<h1>Clinical user guide</h1>
+<p class="muted">For physicians and qualified healthcare professionals · Version 2026-10-24</p>
+<p class="note"><strong>Current release:</strong> AIRA Adaptive is designed for physicians to assess their real patients. In this release, real-patient processing is <strong>not yet enabled</strong>: the server accepts only cases the professional confirms as fictitious, used for testing, demonstration and review. Do not enter real patient data until this notice is removed.</p>
+
+<h2>Before the assessment</h2>
+<ol>
+  <li>Confirm the case is within the <a href="../intended-use/">intended use</a>: elective plastic or aesthetic surgery, patient aged 16 to 89.</li>
+  <li>Inform the patient and obtain and document four consents in your own records: privacy (including processing in the United States), medical, contact, and the use of an AI-assisted decision-support tool.</li>
+  <li>Gather the inputs: age, weight (kg), height (cm), smoking status, Caprini total score, hypertension (optional) and the planned procedure.</li>
+  <li>Keep the link to the patient in your own medical record. Never type names, contact details, ID numbers or dates into the assistant.</li>
+</ol>
+
+<h2>Running the assessment</h2>
+<ol>
+  <li>Ask the assistant for an AIRA Adaptive assessment. It first checks your account and available assessments, and shows a data notice.</li>
+  <li>Answer one question at a time. Smoking status: never, occasionally, light (1–7 per week), heavy (more than 7 per week) or smoker if the intensity is unknown.</li>
+  <li>Confirm the four consents only if they were actually given.</li>
+  <li>Check the summary carefully and confirm. One assessment is used only if a report is returned.</li>
+</ol>
+
+<h2>Reading the report</h2>
+<ul>
+  <li><strong>Bukret Score and risk level:</strong> a structured estimate of preoperative risk from the inputs entered.</li>
+  <li><strong>Contributing factors:</strong> which inputs raised the risk.</li>
+  <li><strong>Recommendations:</strong> optimization measures to consider, such as weight management, smoking cessation, blood-pressure control or specialist referral.</li>
+  <li><strong>Preliminary surgical eligibility:</strong> a category for your review, never an authorization to operate.</li>
+</ul>
+<p>Interpret the report together with the full clinical picture. You may change or disregard any result. Record your own decision in the medical record and tell the patient that AI-assisted decision support was used.</p>
+
+<h2>History</h2>
+<p>You can list and reopen assessments of your own organization. History shows the procedure, the year, the score and the risk level.</p>
+
+<h2>When not to rely on the result</h2>
+<ul>
+  <li>Data you are unsure of, or values that do not match the patient.</li>
+  <li>Conditions not captured by the inputs that change the risk.</li>
+  <li>Any emergency: contact emergency services.</li>
+</ul>
+
+<h2>Errors and support</h2>
+<p>See <a href="../docs/">Troubleshooting</a>. Report unexpected results or safety concerns to <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a>, including the assessment ID (never patient identifiers).</p>
+
+</main>
+<footer>
+  AIRA Adaptive is provided by Dr. Williams Erik Bukret, Buenos Aires, Argentina · <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">Contact</a><br>
+  Clinical decision support for licensed professionals. Not a diagnosis. Not for emergencies. No regulatory clearance or certification is claimed.
+</footer>
+</body>
+</html>
