@@ -22,8 +22,8 @@
 <ul>
   <li>Professional accounts are verified by AIRA Adaptive before they can run assessments.</li>
   <li>AI assistants connect through OAuth 2.1 with PKCE; AIRA Adaptive never receives or stores your assistant credentials, and stores its own connection tokens only as cryptographic hashes.</li>
-  <li>Each organization can access only its own assessments, enforced in the database.</li>
-  <li>Server credentials are never sent to browsers or AI assistants. Sign-in and authorization endpoints are rate-limited.</li>
+  <li>Each organization can access only its own assessments, enforced by the server and by database access rules.</li>
+  <li>Server credentials are never sent to browsers or AI assistants. Authorization endpoints and tool calls are rate-limited.</li>
 </ul>
 
 <h2>Data minimization</h2>
