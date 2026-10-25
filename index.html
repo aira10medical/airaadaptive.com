@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AIRA Adaptive Professional</title>
-<meta name="description" content="AIRA Adaptive Professional: clinical decision support for plastic surgeons and qualified medical professionals.">
+<meta name="description" content="AIRA Adaptive Professional: clinical decision support for the personalized preoperative assessment of patients, based on published research and internal clinical validation of the Bukret Score.">
 <link rel="icon" href="assets/icon.png">
 <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -16,16 +16,23 @@
 </header>
 <main>
 <h1>AIRA Adaptive Professional</h1>
-<p class="muted">Clinical decision support for plastic surgeons</p>
-<p>AIRA Adaptive Professional is a physician-directed clinical decision-support tool for plastic surgeons and qualified medical professionals. It runs a structured preoperative risk stratification with the Bukret Score and returns the report of the AIRA Adaptive engine: risk level, contributing factors, preoperative optimization recommendations for the professional and a preliminary surgical eligibility category for medical review.</p>
+<p class="muted">Clinical decision support for the personalized preoperative assessment of patients, based on published research and clinical validation</p>
+<p>AIRA Adaptive Professional is a clinical decision-support platform for licensed physicians, developed from the peer-reviewed research of Dr. Williams Erik Bukret. It runs a structured preoperative risk stratification with the Bukret Score and returns the report of the AIRA Adaptive engine: risk level, contributing factors, preoperative optimization recommendations for the professional and a preliminary surgical eligibility category for medical review.</p>
 <p>Results are structured, interpretable findings that support independent professional judgment. AIRA Adaptive does not establish diagnoses, does not decide surgical eligibility and does not replace the treating physician. Every result must be reviewed by a qualified healthcare professional.</p>
 <p class="note"><strong>Current release:</strong> AIRA Adaptive is designed for physicians to assess their real patients. In this release, real-patient processing is <strong>not yet enabled</strong>: only cases confirmed as fictitious, used for testing, demonstration and review, are accepted. Do not enter real patient data until this notice is removed.</p>
+<h2>Scientific basis</h2>
+<ul>
+  <li>Bukret WE. A Novel Artificial Intelligence-assisted Risk Assessment Model for Preventing Complications in Esthetic Surgery. <em>Plast Reconstr Surg Glob Open</em> 2021;9(7):e3698. <a href="https://doi.org/10.1097/GOX.0000000000003698">doi:10.1097/GOX.0000000000003698</a> &mdash; development of the Bukret Score and internal validation in a retrospective cohort (372 patients): complication rates rose across risk groups.</li>
+  <li>Bukret WE. Artificial Intelligence-assisted Risk Stratification in Aesthetic Surgery: A Prospective Observational Study. <em>Plast Reconstr Surg Glob Open</em> 2025;13(7):e6948. <a href="https://doi.org/10.1097/GOX.0000000000006948">doi:10.1097/GOX.0000000000006948</a> &mdash; prospective evaluation of the stratification workflow in clinical practice (ClinicalTrials.gov NCT06507384).</li>
+  <li>Bukret WE. Prospective Evaluation of an Automated Rule-based Screening Tool for Body Dysmorphic Disorder in Aesthetic Surgery. <em>Plast Reconstr Surg Glob Open</em> 2025;13(10):e7217. <a href="https://doi.org/10.1097/GOX.0000000000007217">doi:10.1097/GOX.0000000000007217</a> &mdash; related research by the same group; BDD screening is not part of the current AIRA Adaptive release.</li>
+</ul>
+<p class="muted">External, multicenter validation has not yet been published. No accuracy figure is claimed as clinical performance.</p>
 <h2>Use it from your AI assistant</h2>
 <p>AIRA Adaptive is available as a remote MCP connector. In Claude, add it as a connector with the server URL below and sign in with your AIRA Adaptive professional account.</p>
 <p><code>https://mcp.drbukret.com/functions/v1/aira-adaptive</code></p>
 <p><a href="docs/">Read the connector documentation</a> · <a href="intended-use/">Intended use</a> · <a href="clinical-manual/">Clinical user guide</a> · <a href="security/">Security</a></p>
 <h2>Who it is for</h2>
-<p>Physicians and surgical teams with an AIRA Adaptive professional account, verified outside the AI assistant. Patients never use AIRA Adaptive or run their own assessment. It is not intended for emergencies or diagnosis.</p>
+<p>Physicians and surgical teams with an AIRA Adaptive professional account, verified outside the AI assistant (<a href="apply/">apply for access</a>). Patients never use AIRA Adaptive or run their own assessment. It is not intended for emergencies or diagnosis.</p>
 <h2>The physician decides</h2>
 <p>The physician obtains and documents the patient&#x27;s consents, enters and validates the clinical data, runs the assessment, interprets the Bukret Score and risk factors, reviews the recommendations and makes the final decision on surgical eligibility and preoperative optimization. The software supports that decision; it does not replace clinical judgment or authorize surgery.</p>
 <h2>Privacy by design</h2>
