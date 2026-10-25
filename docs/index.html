@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AIRA Adaptive Professional Documentation</title>
+<title>AIRA Adaptive Documentation</title>
 <meta name="description" content="How to connect and use the AIRA Adaptive connector, its tools, data handling and troubleshooting.">
 <link rel="icon" href="../assets/icon.png">
 <link rel="stylesheet" href="../assets/site.css">
@@ -15,10 +15,10 @@
   <nav><a href="../docs/">Documentation</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a></nav>
 </header>
 <main>
-<h1>AIRA Adaptive Professional connector</h1>
-<p class="muted">Clinical decision support for plastic surgeons: preoperative risk stratification with the Bukret Score and optimization recommendations, for qualified medical professionals. Works with AI assistants that support remote MCP connectors, including Claude.</p>
+<h1>AIRA Adaptive connector</h1>
+<p class="muted">Clinical decision support for personalized preoperative assessment in plastic and aesthetic surgery: Bukret Score risk stratification and optimization recommendations, for licensed physicians. Works with AI assistants that support remote MCP connectors, including Claude.</p>
 
-<p class="note"><strong>Current release:</strong> AIRA Adaptive is designed for physicians to assess their real patients. In this release, real-patient processing is <strong>not yet enabled</strong>: the server accepts only cases the professional confirms as fictitious, used for testing, demonstration and review. Do not enter real patient data until this notice is removed. Results are decision support for the treating professional; they are not a diagnosis and do not replace clinical judgment. Not for patients or emergencies.</p>
+<p class="note"><strong>Activation status:</strong> processing of patient data is <strong>pending activation</strong> while regulatory and data-protection requirements are completed. Until then, the server asks the professional to confirm that each case is fictitious. Do not enter an actual patient's data until this notice is removed. Results are decision support for the treating professional; they are not a diagnosis and do not replace clinical judgment. Not for patients or emergencies.</p>
 
 <h2>Professional review and use of AI</h2>
 <ul>
@@ -59,7 +59,7 @@
 <h2>Example prompts</h2>
 <ul>
   <li>"How many AIRA Adaptive assessments do I have available?"</li>
-  <li>"Fictitious test case TEST-01: run an AIRA Adaptive pre-op screening. 45 y, 70 kg, 168 cm, never smoked, Caprini 2, liposuction, all 4 consents given (privacy, medical, contact and AI use). The case is fictitious."</li>
+  <li>"Test case TEST-01: run an AIRA Adaptive preoperative assessment. 45 y, 70 kg, 168 cm, never smoked, Caprini 2, liposuction, all 4 consents given (privacy, medical, contact and AI use). The case is fictitious."</li>
   <li>"Show my last 5 AIRA Adaptive assessments."</li>
   <li>"Open the full report of my most recent AIRA Adaptive assessment."</li>
 </ul>
@@ -85,7 +85,7 @@
   <tr><td>Account pending verification</td><td>Your professional account has not been activated yet. Contact AIRA Adaptive support.</td></tr>
   <tr><td>No assessments available</td><td>Your organization has no assessments left. Access is managed outside the assistant.</td></tr>
   <tr><td>"This connection request is no longer valid"</td><td>The sign-in link expired. Start the connection again from your assistant.</td></tr>
-  <tr><td>Pilot: fictitious patients only</td><td>Confirm that the case is fictitious. Real-patient processing is not yet enabled in this release.</td></tr>
+  <tr><td>Patient-data processing pending activation</td><td>Confirm that the case is fictitious. Processing of patient data is not yet activated.</td></tr>
   <tr><td>Missing consents or missing AI consent</td><td>Confirm all four consents. Without them no assessment is run and no assessment is used.</td></tr>
   <tr><td>Implausible BMI, whole numbers, invalid procedure</td><td>Check weight and height, enter age and Caprini as whole numbers, and choose a procedure from the list (or "other").</td></tr>
   <tr><td>Authorization failed or connector disconnected</td><td>Remove and add the connector again, then sign in.</td></tr>
