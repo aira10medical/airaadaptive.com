@@ -18,15 +18,18 @@
 <h1>AIRA Adaptive Professional connector</h1>
 <p class="muted">Clinical decision support for plastic surgeons: preoperative risk stratification with the Bukret Score and optimization recommendations, for qualified medical professionals. Works with AI assistants that support remote MCP connectors, including Claude.</p>
 
-<p class="note"><strong>Current release:</strong> AIRA Adaptive is designed for the assessment of real patients by verified professionals. In this release, real-patient processing is <strong>not yet enabled</strong>: the server accepts only cases the professional confirms as fictitious. Do not enter real patient data until this notice is removed. Results are decision support for the treating professional; they are not a diagnosis and do not replace clinical judgment. Not for patients or emergencies.</p>
+<p class="note"><strong>Current release:</strong> AIRA Adaptive is designed for physicians to assess their real patients. In this release, real-patient processing is <strong>not yet enabled</strong>: the server accepts only cases the professional confirms as fictitious, used for testing, demonstration and review. Do not enter real patient data until this notice is removed. Results are decision support for the treating professional; they are not a diagnosis and do not replace clinical judgment. Not for patients or emergencies.</p>
 
 <h2>Professional review and use of AI</h2>
 <ul>
-  <li>For use by physicians and qualified healthcare professionals only. Patients do not access this connector.</li>
+  <li>For use by physicians and qualified healthcare professionals only. The physician is the user: patients never use this connector or run their own assessment.</li>
+  <li>The physician obtains and documents the patient&#x27;s consents, enters and validates the clinical data, runs the assessment, interprets the Bukret Score and risk factors, reviews the recommendations and makes the final decision on surgical eligibility and preoperative optimization.</li>
   <li>Every result must be reviewed and interpreted by the treating professional, who keeps full clinical responsibility and may change or disregard it.</li>
   <li>The surgical eligibility category is preliminary information for medical review, never an authorization to operate.</li>
   <li>Results are produced by an algorithm and presented through an AI assistant. Tell your patient when AI-assisted decision support was used in their evaluation.</li>
 </ul>
+
+<p>See also: <a href="../intended-use/">Intended use</a> · <a href="../clinical-manual/">Clinical user guide</a> · <a href="../security/">Security</a></p>
 
 <h2>Requirements</h2>
 <ul>
@@ -62,7 +65,7 @@
 </ul>
 
 <h2>Consents</h2>
-<p>Before running, the professional confirms four consents given by the patient. Without all four, no assessment is run.</p>
+<p>Before running, the professional confirms four consents that they obtained from the patient and documented in their own records. Without all four, no assessment is run.</p>
 <ul>
   <li><strong>Privacy:</strong> the patient accepted the AIRA Adaptive privacy policy, including processing in the United States.</li>
   <li><strong>Medical:</strong> the patient gave medical consent.</li>

@@ -19,15 +19,17 @@
 <p class="muted">Clinical decision support for plastic surgeons</p>
 <p>AIRA Adaptive Professional is a physician-directed clinical decision-support tool for plastic surgeons and qualified medical professionals. It runs a structured preoperative risk stratification with the Bukret Score and returns the report of the AIRA Adaptive engine: risk level, contributing factors, preoperative optimization recommendations for the professional and a preliminary surgical eligibility category for medical review.</p>
 <p>Results are structured, interpretable findings that support independent professional judgment. AIRA Adaptive does not establish diagnoses, does not decide surgical eligibility and does not replace the treating physician. Every result must be reviewed by a qualified healthcare professional.</p>
-<p class="note"><strong>Pilot:</strong> the current version accepts <strong>fictitious cases only</strong>. Do not enter real patient data.</p>
+<p class="note"><strong>Current release:</strong> AIRA Adaptive is designed for physicians to assess their real patients. In this release, real-patient processing is <strong>not yet enabled</strong>: only cases confirmed as fictitious, used for testing, demonstration and review, are accepted. Do not enter real patient data until this notice is removed.</p>
 <h2>Use it from your AI assistant</h2>
 <p>AIRA Adaptive is available as a remote MCP connector. In Claude, add it as a connector with the server URL below and sign in with your AIRA Adaptive professional account.</p>
 <p><code>https://mcp.drbukret.com/functions/v1/aira-adaptive</code></p>
-<p><a href="docs/">Read the connector documentation</a></p>
+<p><a href="docs/">Read the connector documentation</a> · <a href="intended-use/">Intended use</a> · <a href="clinical-manual/">Clinical user guide</a> · <a href="security/">Security</a></p>
 <h2>Who it is for</h2>
-<p>Physicians and surgical teams with an AIRA Adaptive professional account, verified outside the AI assistant. This release is for professional use only: patients do not access it. It is not intended for emergencies or diagnosis.</p>
+<p>Physicians and surgical teams with an AIRA Adaptive professional account, verified outside the AI assistant. Patients never use AIRA Adaptive or run their own assessment. It is not intended for emergencies or diagnosis.</p>
+<h2>The physician decides</h2>
+<p>The physician obtains and documents the patient&#x27;s consents, enters and validates the clinical data, runs the assessment, interprets the Bukret Score and risk factors, reviews the recommendations and makes the final decision on surgical eligibility and preoperative optimization. The software supports that decision; it does not replace clinical judgment or authorize surgery.</p>
 <h2>Privacy by design</h2>
-<p>Patient names, emails, phone numbers and ID numbers are never requested. Cases are identified only by an optional short alias. See the <a href="privacy/">Privacy Policy</a>.</p>
+<p>Patient names, emails, phone numbers, ID numbers, dates and case aliases are never requested. The procedure is chosen from a fixed list and history shows the year only. See the <a href="privacy/">Privacy Policy</a>.</p>
 </main>
 <footer>
   AIRA Adaptive is provided by Dr. Williams Erik Bukret, Buenos Aires, Argentina · <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">Contact</a><br>

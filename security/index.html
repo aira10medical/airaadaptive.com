@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIRA Adaptive Security</title>
+<meta name="description" content="Security, access control, data minimization and audit controls of AIRA Adaptive.">
+<link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header>
+  <img src="../assets/icon.png" alt="">
+  <a class="brand" href="../">AIRA Adaptive</a>
+  <nav><a href="../docs/">Documentation</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a></nav>
+</header>
+<main>
+<h1>Security</h1>
+<p class="muted">Controls in place · Version 2026-10-24</p>
+
+<h2>Access</h2>
+<ul>
+  <li>Professional accounts are verified by AIRA Adaptive before they can run assessments.</li>
+  <li>AI assistants connect through OAuth 2.1 with PKCE; AIRA Adaptive never receives or stores your assistant credentials, and stores its own connection tokens only as cryptographic hashes.</li>
+  <li>Each organization can access only its own assessments, enforced by the server and by database access rules.</li>
+  <li>Server credentials are never sent to browsers or AI assistants. Authorization endpoints and tool calls are rate-limited.</li>
+</ul>
+
+<h2>Data minimization</h2>
+<ul>
+  <li>Only structured clinical fields are accepted; names, contact details, ID numbers, dates and case aliases are never requested.</li>
+  <li>History is shown to the assistant with the year only.</li>
+  <li>The connector does not read the assistant's memory, chat history or files.</li>
+  <li>Inputs are validated on the server before any assessment is used.</li>
+</ul>
+
+<h2>Audit</h2>
+<p>Each completed or failed assessment records the consents confirmed, the professional who confirmed them, the time, the version of the privacy notice and the assistant used (Claude or ChatGPT). Connections are logged with the assistant used. Application logs contain technical codes only, never clinical data or tokens.</p>
+
+<h2>Infrastructure</h2>
+<p>Data are hosted by Supabase in the United States (AWS us-east-1), encrypted in transit. See the <a href="../privacy/">Privacy Policy</a> for providers, retention and your rights.</p>
+
+<h2>Reporting a vulnerability</h2>
+<p>Write to <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a>. Please do not include patient data.</p>
+
+</main>
+<footer>
+  AIRA Adaptive is provided by Dr. Williams Erik Bukret, Buenos Aires, Argentina · <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">Contact</a><br>
+  Clinical decision support for licensed professionals. Not a diagnosis. Not for emergencies. No regulatory clearance or certification is claimed.
+</footer>
+</body>
+</html>
