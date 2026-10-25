@@ -133,6 +133,10 @@
     <span>I consent to be contacted by AIRA Adaptive regarding this application. My details will be used only to review and respond to it, as described in the <a href="privacy/">applicant privacy notice</a>. <span class="req">*</span></span></label>
   <div class="err" id="err-consent_contact">Consent is required to process your application.</div>
 
+  <label class="consent"><input type="checkbox" id="terms_accepted" name="terms_accepted" required>
+    <span>I have read and accept the <a href="/terms/" target="_blank" rel="noopener">Terms of Use</a> and the <a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> of AIRA Adaptive. <span class="req">*</span></span></label>
+  <div class="err" id="err-terms_accepted">You must accept the Terms of Use and Privacy Policy.</div>
+
   <button type="submit" id="submit">Submit application</button>
   <p class="note status bad" id="status" role="alert" hidden></p>
   <p class="note" id="fallback" hidden>If it keeps failing, <a id="fallback-mail" href="mailto:drbukret@drbukret.com">send your application by email instead</a> (your answers are copied into the message).</p>
@@ -200,7 +204,8 @@
       ["specialty", !val("specialty")],
       ["website", !!val("website") && !/^(https?:\/\/)?[^\s<>"]+\.[^\s<>"]+$/i.test(val("website"))],
       ["professional_confirmed", !val("professional_confirmed")],
-      ["consent_contact", !val("consent_contact")]
+      ["consent_contact", !val("consent_contact")],
+      ["terms_accepted", !val("terms_accepted")]
     ];
     checks.forEach(function (c) { if (setErr(c[0], c[1]) && !first) first = c[0]; });
     if (first) {
@@ -216,7 +221,7 @@
       "City: " + b.city, "Institution / Practice: " + b.institution, "Specialty: " + b.specialty, "Website: " + b.website,
       "Primary interest: " + b.interest, "Annual surgical volume: " + b.surgical_volume,
       "Uses structured risk assessment: " + b.structured_risk_assessment, "Wants a demonstration: " + b.wants_demo,
-      "Licensed professional: Yes", "Consent to be contacted: Yes", "Comments: " + b.comments];
+      "Licensed professional: Yes", "Consent to be contacted: Yes", "Accepted Terms of Use and Privacy Policy: Yes", "Comments: " + b.comments];
     document.getElementById("fallback-mail").href = "mailto:drbukret@drbukret.com?subject=" +
       encodeURIComponent("AIRA Adaptive professional application — " + b.full_name) + "&body=" + encodeURIComponent(lines.join("\n").slice(0, 1500));
     document.getElementById("fallback").hidden = false;
@@ -239,7 +244,8 @@
       interest: val("interest"), institution: val("institution"), city: val("city"), website: val("website"),
       surgical_volume: val("surgical_volume"), structured_risk_assessment: val("structured_risk_assessment"),
       wants_demo: val("wants_demo"), comments: val("comments"),
-      professional_confirmed: val("professional_confirmed") === true, consent_contact: val("consent_contact") === true
+      professional_confirmed: val("professional_confirmed") === true, consent_contact: val("consent_contact") === true,
+      terms_accepted: val("terms_accepted") === true
     };
     var ctrl = window.AbortController ? new AbortController() : null, timer = ctrl && setTimeout(function () { ctrl.abort(); }, 25000);
     fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal: ctrl && ctrl.signal })
