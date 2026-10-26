@@ -27,6 +27,9 @@
   .bad { border-left-color:#c0392b; }
   .tag { display:inline-block; font-size:12px; font-weight:700; border:1px solid var(--accent); color:var(--accent); border-radius:6px; padding:0 6px; }
   [hidden] { display:none !important; }
+  .msg { margin-top:8px; font-size:15px; border-left:4px solid var(--accent); background:var(--note); padding:8px 10px; border-radius:4px; }
+  .msg.bad { border-left-color:#c0392b; }
+  .courtesy { border-left-color:#2e7d32; }
 </style>
 </head>
 <body>
@@ -43,13 +46,15 @@
 
 <section id="linked" hidden>
   <p>Evaluaciones disponibles en tu cuenta: <strong id="balance">—</strong></p>
+  <p id="courtesy" class="note courtesy" hidden></p>
+  <p id="noOnline" class="muted" hidden>El pago en línea con PayPal todavía no está habilitado. Mientras tanto, elegí un plan y enviá la solicitud: te contactamos para confirmar el pago y acreditar las evaluaciones.</p>
   <div id="paySection" hidden>
     <h2>Pagar en línea <span id="envTag" class="tag" hidden>SANDBOX · sin dinero real</span></h2>
     <p class="muted">El pago se hace en PayPal. Las evaluaciones se acreditan cuando PayPal confirma el cobro.</p>
     <div id="payPlans" class="plans"></div>
   </div>
   <h2>Solicitar evaluaciones</h2>
-  <p class="muted">Enviás la solicitud a AIRA Adaptive. No se cobra nada en este paso: te contactamos para confirmar el plan y la acreditación.</p>
+  <p class="muted">Esto <strong>no es una compra</strong>: enviás la solicitud a AIRA Adaptive y no se cobra nada en este paso. Te contactamos para confirmar el plan y acreditar las evaluaciones en tu cuenta.</p>
   <div id="reqPlans" class="plans"></div>
 </section>
 
@@ -90,7 +95,7 @@
     cancelado: "Pago cancelado. No se realizó ningún cobro.",
     verificar: "No pudimos verificar el pago todavía. Consultá tu saldo en unos minutos; la acreditación depende sólo de la confirmación de PayPal."
   };
-  function show(text, bad) { var r = $("result"); r.textContent = text; r.hidden = false; r.className = "note status" + (bad ? " bad" : ""); }
+  function show(text, bad) { var r = $("result"); r.textContent = text; r.hidden = false; r.className = "note status" + (bad ? " bad" : ""); r.scrollIntoView({ block: "center" }); }
   if (estado && MSG[estado]) show(MSG[estado], ["rechazado", "no_aprobado", "cancelado"].indexOf(estado) >= 0);
   // El enlace firmado no debe quedar en el historial ni compartirse por accidente.
   if (t && history.replaceState) history.replaceState(null, "", location.pathname);
@@ -102,7 +107,8 @@
     var n = document.createElement("div"); n.className = "muted"; n.textContent = p.assessments + (p.assessments === 1 ? " evaluación" : " evaluaciones");
     d.appendChild(s); d.appendChild(pr); d.appendChild(n);
     if (label) { var b = document.createElement("button"); b.type = "button"; b.textContent = label; if (label !== "Pagar con PayPal") b.className = "secondary";
-      b.onclick = function () { onClick(b); }; d.appendChild(b); }
+      var m = document.createElement("div"); m.className = "msg"; m.setAttribute("role", "status"); m.setAttribute("aria-live", "polite"); m.hidden = true;
+      b.onclick = function () { onClick(b, m); }; d.appendChild(b); d.appendChild(m); }
     return d;
   }
   function call(path, body) {
@@ -111,32 +117,51 @@
   }
   var ERR = { invalid_or_expired_link: "El enlace venció o no es válido. Pedí uno nuevo en Claude o ChatGPT.", account_not_active: "La cuenta no está activa.",
     online_payment_not_available: "El pago en línea todavía no está disponible para tu cuenta. Usá «Solicitar».", rate_limited: "Demasiadas solicitudes. Probá más tarde." };
-  function fail(j) { show(ERR[j && j.error] || "No se pudo completar la operación. Probá de nuevo o escribinos a drbukret@drbukret.com.", true); }
+  function fail(j, m) {
+    var text = ERR[j && j.error] || "No se pudo completar la operación. Probá de nuevo o escribinos a drbukret@drbukret.com.";
+    if (m) return say(m, text, true);
+    show(text, true);
+  }
+  // El mensaje aparece junto al botón tocado y se lleva a la vista (en el teléfono el encabezado queda fuera de pantalla).
+  function say(m, text, bad) { m.textContent = text; m.className = "msg" + (bad ? " bad" : ""); m.hidden = false; m.scrollIntoView({ behavior: "smooth", block: "center" }); }
+  function fecha(iso) { try { return new Date(iso).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" }); } catch (e) { return iso.slice(0, 10); } }
 
   if (t) {
     $("linked").hidden = false;
     call("/session?t=" + encodeURIComponent(t)).then(function (s) {
       if (s._status !== 200) return fail(s);
       $("balance").textContent = s.assessments_available;
+      if (s.courtesy) {
+        $("courtesy").textContent = (s.courtesy.granted_now ? "Se acreditó tu evaluación de cortesía. " : "Tu cuenta tiene una evaluación de cortesía. ") +
+          "Vence el " + fecha(s.courtesy.expires_at) + ". Volvé a Claude o ChatGPT y pedí tu evaluación.";
+        $("courtesy").hidden = false;
+      }
+      $("noOnline").hidden = !!(s.online_payment_available && s.payment_plans.length);
+      var reqButtons = [];
       s.request_plans.forEach(function (p) {
-        $("reqPlans").appendChild(card(p, "Solicitar", function (b) {
-          b.disabled = true;
+        $("reqPlans").appendChild(card(p, "Solicitar este plan", function (b, m) {
+          reqButtons.forEach(function (x) { x.disabled = true; });
+          b.textContent = "Enviando…";
           call("/request", { t: t, plan_code: p.plan_code }).then(function (j) {
-            b.disabled = false;
-            if (!j.ok) return fail(j);
-            show(j.duplicate ? "Ya tenías una solicitud abierta hoy; la recibimos. Te vamos a contactar para confirmar la acreditación." : "Solicitud enviada. No se cobró nada. Te vamos a contactar para confirmar el plan y la acreditación.");
-          }, function () { b.disabled = false; fail(); });
+            b.textContent = "Solicitar este plan";
+            if (!j.ok) { reqButtons.forEach(function (x) { x.disabled = false; }); return fail(j, m); }
+            var ref = String(j.reference || "").slice(0, 8).toUpperCase();
+            say(m, (j.duplicate ? "Ya habíamos recibido tu solicitud de hoy" : "Solicitud enviada") + " (referencia " + ref + "). No se cobró nada. " +
+              "Te contactamos por email para confirmar el pago y acreditar las evaluaciones; después las ves en Claude o ChatGPT.");
+            b.textContent = "Solicitud enviada";
+          }, function () { reqButtons.forEach(function (x) { x.disabled = false; }); b.textContent = "Solicitar este plan"; fail(null, m); });
         }));
+        reqButtons.push($("reqPlans").lastChild.querySelector("button"));
       });
       if (s.online_payment_available && s.payment_plans.length) {
         $("paySection").hidden = false; $("envTag").hidden = s.payment_env !== "sandbox";
         s.payment_plans.forEach(function (p) {
-          $("payPlans").appendChild(card(p, "Pagar con PayPal", function (b) {
-            b.disabled = true;
+          $("payPlans").appendChild(card(p, "Pagar con PayPal", function (b, m) {
+            b.disabled = true; b.textContent = "Abriendo PayPal…";
             call("/order", { t: t, plan_code: p.plan_code }).then(function (j) {
-              if (j._status !== 200 || !j.approve_url) { b.disabled = false; return fail(j); }
-              location.href = j.approve_url;
-            }, function () { b.disabled = false; fail(); });
+              if (j._status !== 200 || !j.approve_url) { b.disabled = false; b.textContent = "Pagar con PayPal"; return fail(j, m); }
+              location.assign(j.approve_url);
+            }, function () { b.disabled = false; b.textContent = "Pagar con PayPal"; fail(null, m); });
           }));
         });
       }
