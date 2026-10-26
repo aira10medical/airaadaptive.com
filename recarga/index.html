@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recarga de evaluaciones · AIRA Adaptive</title>
+<meta name="description" content="Solicitá más evaluaciones de AIRA Adaptive para tu cuenta profesional.">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .plans { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-top:12px; }
+  .plan { border:1px solid var(--line); border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:6px; }
+  .plan strong { font-size:17px; }
+  .price { font-size:22px; font-weight:700; color:var(--accent); }
+  .plan button { margin-top:auto; }
+  button { font:inherit; font-weight:700; font-size:16px; color:#fff; background:#1F4E79; border:0; border-radius:10px; padding:12px 18px; min-height:46px; cursor:pointer; width:100%; }
+  button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+  button:disabled { opacity:.6; cursor:progress; }
+  label.f { display:block; font-weight:600; margin:14px 0 4px; }
+  input[type=text], input[type=email], select { width:100%; font:inherit; font-size:16px; color:var(--fg); background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:10px 12px; min-height:44px; }
+  .consent { display:flex; gap:10px; align-items:flex-start; margin-top:16px; }
+  .consent input { margin-top:4px; width:18px; height:18px; flex:none; accent-color:var(--accent); }
+  .hp { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
+  .status { margin-top:16px; }
+  .bad { border-left-color:#c0392b; }
+  .tag { display:inline-block; font-size:12px; font-weight:700; border:1px solid var(--accent); color:var(--accent); border-radius:6px; padding:0 6px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<header>
+  <img src="../assets/icon.png" alt="">
+  <a class="brand" href="../">AIRA Adaptive</a>
+  <nav><a href="../docs/">Documentation</a><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a></nav>
+</header>
+<main>
+<h1>Recarga de evaluaciones</h1>
+<p class="muted">Cuenta profesional de AIRA Adaptive · <span lang="en">Assessment top-up for your professional account</span></p>
+
+<div id="result" class="note status" role="status" hidden></div>
+
+<section id="linked" hidden>
+  <p>Evaluaciones disponibles en tu cuenta: <strong id="balance">—</strong></p>
+  <div id="paySection" hidden>
+    <h2>Pagar en línea <span id="envTag" class="tag" hidden>SANDBOX · sin dinero real</span></h2>
+    <p class="muted">El pago se hace en PayPal. Las evaluaciones se acreditan cuando PayPal confirma el cobro.</p>
+    <div id="payPlans" class="plans"></div>
+  </div>
+  <h2>Solicitar evaluaciones</h2>
+  <p class="muted">Enviás la solicitud a AIRA Adaptive. No se cobra nada en este paso: te contactamos para confirmar el plan y la acreditación.</p>
+  <div id="reqPlans" class="plans"></div>
+</section>
+
+<section id="unlinked" hidden>
+  <p>Para pagar en línea o solicitar desde tu cuenta, pedí el enlace de recarga en Claude o ChatGPT (por ejemplo: «quiero más evaluaciones de AIRA»). También podés enviar la solicitud acá con el email de tu cuenta profesional.</p>
+  <h2>Planes vigentes</h2>
+  <div id="pubPlans" class="plans"></div>
+  <form id="req" novalidate>
+    <label class="f" for="full_name">Nombre y apellido</label>
+    <input id="full_name" type="text" autocomplete="name" maxlength="120" required>
+    <label class="f" for="email">Email de tu cuenta de AIRA Adaptive</label>
+    <input id="email" type="email" autocomplete="email" maxlength="200" required>
+    <label class="f" for="plan">Plan</label>
+    <select id="plan"><option value="">A definir</option></select>
+    <div class="hp" aria-hidden="true"><label>Fax <input id="fax" type="text" tabindex="-1" autocomplete="off"></label></div>
+    <label class="consent"><input id="pro" type="checkbox"> <span>Soy profesional de la salud con matrícula vigente y titular de la cuenta indicada.</span></label>
+    <p class="muted">No incluyas datos de pacientes. <a href="../privacy/">Política de privacidad</a>.</p>
+    <button id="send" type="submit">Enviar solicitud</button>
+  </form>
+</section>
+</main>
+<footer>
+  AIRA Adaptive is provided by Dr. Williams Erik Bukret, Buenos Aires, Argentina · <a href="mailto:drbukret@drbukret.com">drbukret@drbukret.com</a> · <a href="https://drbukret.com/contact/">Contact</a><br>
+  Clinical decision support for licensed professionals. Not a diagnosis. Not for emergencies. No regulatory clearance or certification is claimed.
+</footer>
+<script>
+(function () {
+  var API = "https://xdofwnncvhgdcsxlslci.supabase.co/functions/v1/aira-checkout";
+  var q = new URLSearchParams(location.search), t = q.get("t"), estado = q.get("estado");
+  var $ = function (id) { return document.getElementById(id); };
+  var MSG = {
+    acreditado: "Pago confirmado por PayPal. Las evaluaciones ya están en tu cuenta: volvé a Claude o ChatGPT y pedí tu saldo.",
+    ya_acreditado: "Este pago ya estaba acreditado. Volvé a Claude o ChatGPT y pedí tu saldo.",
+    pendiente: "PayPal todavía está procesando el pago. Se acredita automáticamente cuando lo confirme; podés consultar tu saldo en unos minutos.",
+    no_aprobado: "El pago no se completó en PayPal. No se realizó ningún cobro.",
+    rechazado: "PayPal no confirmó el pago, así que no se acreditaron evaluaciones. Si se debitó dinero, escribinos a drbukret@drbukret.com.",
+    reembolsado: "Este pago fue reembolsado.",
+    cancelado: "Pago cancelado. No se realizó ningún cobro.",
+    verificar: "No pudimos verificar el pago todavía. Consultá tu saldo en unos minutos; la acreditación depende sólo de la confirmación de PayPal."
+  };
+  function show(text, bad) { var r = $("result"); r.textContent = text; r.hidden = false; r.className = "note status" + (bad ? " bad" : ""); }
+  if (estado && MSG[estado]) show(MSG[estado], ["rechazado", "no_aprobado", "cancelado"].indexOf(estado) >= 0);
+  // El enlace firmado no debe quedar en el historial ni compartirse por accidente.
+  if (t && history.replaceState) history.replaceState(null, "", location.pathname);
+
+  function card(p, label, onClick) {
+    var d = document.createElement("div"); d.className = "plan";
+    var s = document.createElement("strong"); s.textContent = p.name;
+    var pr = document.createElement("div"); pr.className = "price"; pr.textContent = p.currency + " " + p.price;
+    var n = document.createElement("div"); n.className = "muted"; n.textContent = p.assessments + (p.assessments === 1 ? " evaluación" : " evaluaciones");
+    d.appendChild(s); d.appendChild(pr); d.appendChild(n);
+    if (label) { var b = document.createElement("button"); b.type = "button"; b.textContent = label; if (label !== "Pagar con PayPal") b.className = "secondary";
+      b.onclick = function () { onClick(b); }; d.appendChild(b); }
+    return d;
+  }
+  function call(path, body) {
+    return fetch(API + path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {})
+      .then(function (r) { return r.json().then(function (j) { j._status = r.status; return j; }); });
+  }
+  var ERR = { invalid_or_expired_link: "El enlace venció o no es válido. Pedí uno nuevo en Claude o ChatGPT.", account_not_active: "La cuenta no está activa.",
+    online_payment_not_available: "El pago en línea todavía no está disponible para tu cuenta. Usá «Solicitar».", rate_limited: "Demasiadas solicitudes. Probá más tarde." };
+  function fail(j) { show(ERR[j && j.error] || "No se pudo completar la operación. Probá de nuevo o escribinos a drbukret@drbukret.com.", true); }
+
+  if (t) {
+    $("linked").hidden = false;
+    call("/session?t=" + encodeURIComponent(t)).then(function (s) {
+      if (s._status !== 200) return fail(s);
+      $("balance").textContent = s.assessments_available;
+      s.request_plans.forEach(function (p) {
+        $("reqPlans").appendChild(card(p, "Solicitar", function (b) {
+          b.disabled = true;
+          call("/request", { t: t, plan_code: p.plan_code }).then(function (j) {
+            b.disabled = false;
+            if (!j.ok) return fail(j);
+            show(j.duplicate ? "Ya tenías una solicitud abierta hoy; la recibimos. Te vamos a contactar para confirmar la acreditación." : "Solicitud enviada. No se cobró nada. Te vamos a contactar para confirmar el plan y la acreditación.");
+          }, function () { b.disabled = false; fail(); });
+        }));
+      });
+      if (s.online_payment_available && s.payment_plans.length) {
+        $("paySection").hidden = false; $("envTag").hidden = s.payment_env !== "sandbox";
+        s.payment_plans.forEach(function (p) {
+          $("payPlans").appendChild(card(p, "Pagar con PayPal", function (b) {
+            b.disabled = true;
+            call("/order", { t: t, plan_code: p.plan_code }).then(function (j) {
+              if (j._status !== 200 || !j.approve_url) { b.disabled = false; return fail(j); }
+              location.href = j.approve_url;
+            }, function () { b.disabled = false; fail(); });
+          }));
+        });
+      }
+    }, function () { fail(); });
+  } else if (!estado) {
+    $("unlinked").hidden = false;
+    call("/plans").then(function (r) {
+      (r.plans || []).forEach(function (p) {
+        $("pubPlans").appendChild(card(p));
+        var o = document.createElement("option"); o.value = p.plan_code; o.textContent = p.name + " — " + p.currency + " " + p.price; $("plan").appendChild(o);
+      });
+    });
+    $("req").onsubmit = function (e) {
+      e.preventDefault();
+      var body = { full_name: $("full_name").value.trim(), email: $("email").value.trim(), plan_code: $("plan").value || null,
+        professional_confirmed: $("pro").checked, fax: $("fax").value };
+      if (body.full_name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email) || !body.professional_confirmed)
+        return show("Completá nombre, email y la confirmación profesional.", true);
+      $("send").disabled = true;
+      call("/request", body).then(function (j) {
+        $("send").disabled = false;
+        if (!j.ok) return fail(j);
+        $("req").hidden = true; show("Solicitud enviada. No se cobró nada. Vamos a verificar tu cuenta y contactarte para confirmar la acreditación.");
+      }, function () { $("send").disabled = false; fail(); });
+    };
+  }
+})();
+</script>
+</body>
+</html>
