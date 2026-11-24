@@ -33,7 +33,7 @@
 
 <h2>Requirements</h2>
 <ul>
-  <li>An AIRA Adaptive professional account, verified by AIRA Adaptive outside the AI assistant, with assessments available.</li>
+  <li>A free AIRA Adaptive professional account. You can create it during the connection, in one step; no payment and no manual approval.</li>
   <li>An AI assistant plan that allows connectors.</li>
 </ul>
 
@@ -41,7 +41,7 @@
 <ol>
   <li>In Claude, open <em>Customize → Connectors</em> and add <strong>AIRA Adaptive</strong> from the directory, or select <em>Add custom connector</em> and enter the URL <code>https://mcp.drbukret.com/functions/v1/aira-adaptive</code>.</li>
   <li>Click <em>Connect</em>. You are sent to the AIRA Adaptive sign-in page.</li>
-  <li>Sign in with your professional account, check the app name on the consent screen, and click <em>Allow</em>.</li>
+  <li>Sign in, or select <em>Create a free account</em> (name, email, password and the professional confirmation). Check the app name on the consent screen and click <em>Allow</em>. You can start right away.</li>
 </ol>
 <p>Claude asks for your approval before each tool call by default. You can change this per tool in the connector settings.</p>
 <p>To disconnect, remove the connector in your assistant's settings. Access tokens expire automatically.</p>
@@ -49,9 +49,8 @@
 <h2>Tools</h2>
 <div class="table"><table>
   <tr><th>Tool</th><th>Type</th><th>What it does</th></tr>
-  <tr><td><code>start_assessment</code></td><td>Read</td><td>Checks that the account is verified and has an assessment available, and lists the data required. Uses no assessment.</td></tr>
-  <tr><td><code>get_available_assessments</code></td><td>Read</td><td>Returns the account status and the number of assessments available.</td></tr>
-  <tr><td><code>run_assessment</code></td><td>Write</td><td>Runs the official AIRA Adaptive engine after you confirm the data and the four consents, and returns the report: Bukret Score, risk level, contributing factors, recommendations and a surgical eligibility suggestion. Uses one assessment only if a report is returned.</td></tr>
+  <tr><td><code>start_assessment</code></td><td>Read</td><td>Checks that the account can run assessments and lists the data required.</td></tr>
+  <tr><td><code>run_assessment</code></td><td>Write</td><td>Runs the official AIRA Adaptive engine after you confirm the data and the four consents, and returns the report: Bukret Score, risk level, contributing factors, recommendations and a surgical eligibility suggestion. Free.</td></tr>
   <tr><td><code>list_assessments</code></td><td>Read</td><td>Lists recent assessments of your organization (procedure, year and risk level).</td></tr>
   <tr><td><code>get_assessment</code></td><td>Read</td><td>Returns one full report from your organization's history.</td></tr>
 </table></div>
@@ -82,8 +81,8 @@
 <h2>Troubleshooting</h2>
 <div class="table"><table>
   <tr><th>Message</th><th>What to do</th></tr>
-  <tr><td>Account pending verification</td><td>Your professional account has not been activated yet. Contact AIRA Adaptive support.</td></tr>
-  <tr><td>No assessments available</td><td>Your organization has no assessments left. Access is managed outside the assistant.</td></tr>
+  <tr><td>Account pending verification</td><td>The account is suspended. Contact AIRA Adaptive support.</td></tr>
+  <tr><td>Daily limit reached</td><td>Free accounts have a daily limit to prevent abuse. It resets within 24 hours.</td></tr>
   <tr><td>"This connection request is no longer valid"</td><td>The sign-in link expired. Start the connection again from your assistant.</td></tr>
   <tr><td>Patient-data processing pending activation</td><td>Confirm that the case is fictitious. Processing of patient data is not yet activated.</td></tr>
   <tr><td>Missing consents or missing AI consent</td><td>Confirm all four consents. Without them no assessment is run and no assessment is used.</td></tr>
